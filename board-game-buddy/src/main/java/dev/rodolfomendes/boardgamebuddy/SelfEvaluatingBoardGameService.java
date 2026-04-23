@@ -41,24 +41,26 @@ public class SelfEvaluatingBoardGameService implements BoardGameService {
         try {
             return retryTemplate.invoke(() -> askAndEvaluate(question));
         } catch (AnswerNotRelevantException e) {
-            return recover();
+            return recover(question.gameTitle());
         }
     }
 
     private @NonNull Answer askAndEvaluate(Question question) {
+        String prompt = "Answer this question about " + question.gameTitle() + ": " + question.question();
+
         var answerText = chatClient
             .prompt()
-            .user(question.question())
+            .user(prompt)
             .call()
             .content();
 
         evaluateRelevance(question, answerText);
 
-        return new Answer(answerText);
+        return new Answer(question.gameTitle(), answerText);
     }
 
-    public Answer recover() {
-        return new Answer("I'm sorry, I wasn't able to answer the question");
+    private Answer recover(String gameTitle) {
+        return new Answer(gameTitle,"I'm sorry, I wasn't able to answer the question");
     }
 
     private void evaluateRelevance(Question question, String answerText) {

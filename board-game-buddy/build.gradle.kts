@@ -22,6 +22,7 @@ extra["springAiVersion"] = "2.0.0-M4"
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.ai:spring-ai-starter-model-openai")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.wiremock.integrations:wiremock-spring-boot:4.2.1")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")

@@ -1,4 +1,4 @@
 package dev.rodolfomendes.boardgamebuddy;
 
-public record Answer(String answer) {
+public record Answer(String gameTitle, String answer) {
 }
