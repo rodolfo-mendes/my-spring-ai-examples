@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AskController {
     private final BoardGameService boardGameService;
 
-    public AskController(@Qualifier("selfEvaluatingBoardGameService") BoardGameService boardGameService) {
+    public AskController(@Qualifier("springAiBoardGameService") BoardGameService boardGameService) {
         this.boardGameService = boardGameService;
     }
 

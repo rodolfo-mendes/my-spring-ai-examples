@@ -2,6 +2,7 @@ package dev.rodolfomendes.boardgamebuddy;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.evaluation.FactCheckingEvaluator;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
+@Disabled("These tests are designed to evaluate the actual performance of the service and may fail due to changes in the underlying model or API. Enable them when you want to perform an evaluation.")
 @SpringBootTest
 public class SpringAiBoardGameServiceTests {
     @Qualifier("selfEvaluatingBoardGameService")
@@ -33,8 +35,9 @@ public class SpringAiBoardGameServiceTests {
 
     @Test
     public void evaluateRelevancy() {
+        String gameTitle = "Chess";
         String userText = "Why is the sky blue?";
-        Question question = new Question(userText);
+        Question question = new Question(gameTitle, userText);
         Answer answer = boardGameService.askQuestion(question);
 
         EvaluationRequest evaluationRequest = new EvaluationRequest(
@@ -50,8 +53,9 @@ public class SpringAiBoardGameServiceTests {
 
     @Test
     public void evaluateFactualAccuracy() {
+        String gameTitle = "Chess";
         String userText = "Why is the sky blue?";
-        Question question = new Question(userText);
+        Question question = new Question( gameTitle, userText);
         Answer answer = boardGameService.askQuestion(question);
 
         EvaluationRequest evaluationRequest = new EvaluationRequest(
